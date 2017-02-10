@@ -1,0 +1,178 @@
+// Variables
+$color1: #949494; // all-day color
+$color2: #f9f9fb; // app background-color
+$color3: #dbdbdb; // selection color
+$color4: #a7a7a7; // borders color
+$color5: #696969; // font color
+
+$cell-width: 20px;
+
+$cell-height: $cell-width * 2.5;
+$cell-fz: $cell-height / 3.5;
+$heading-fz: $cell-height / 2.5;
+$heading-mb: $cell-height * 0.35;
+$double-cell-width: $cell-width * 2;
+$triple-cell-width: $cell-width * 3;
+$day-width: $cell-width * 24 + $double-cell-width * 2;
+
+// Styles
+* {
+  box-sizing: border-box;
+  user-select: none;
+  cursor: default;
+}
+
+html, body, #app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font: $cell-fz 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: $color5;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  font-weight: 300;
+  background-color: $color2;
+}
+
+.app-component {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-transform: uppercase;
+  h1 {
+    margin-bottom: $heading-mb;
+    font-size: $heading-fz;
+  }
+}
+
+.info-wrap {
+  width: $day-width;
+  height: $cell-height;
+  padding-left: $double-cell-width;
+  .all-day {
+    float: left;
+    height: 100%;
+    width: $double-cell-width;
+    padding-top: $double-cell-width / 4;
+    font-size: $cell-width * 0.65;
+    line-height: $cell-width * 0.8;
+    text-align: center;
+  }
+  .hour {
+    position: relative;
+    float: left;
+    height: 100%;
+    width: $triple-cell-width;
+    line-height: $cell-height;
+    &:before {
+      position: absolute;
+      content: '';
+      bottom: 0;
+      left: 0;
+      height: $cell-width / 2;
+      width: 1px;
+      background-color: $color4;
+    }
+  }
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+}
+
+.buttons-wrap {
+  margin-top: $cell-width;
+  width: $day-width;
+  .button {
+    float: right;
+    font-size: $cell-width * 0.8;
+    margin-left: $cell-width;
+    padding: $cell-width * 0.3 $cell-width * 1.15;
+    border-radius: 3px;
+    text-transform: none;
+    color: $color2;
+    background-color: $color1;
+    box-shadow: 0px 2px 2px -1px #000;
+    cursor: pointer;
+  }
+}
+
+.day-component {
+  box-sizing: content-box;
+  width: $day-width;
+  border: 1px solid $color4;
+  border-bottom: none;
+  height: $cell-height;
+  .day-name {
+    float: left;
+    height: 100%;
+    width: $double-cell-width;
+    line-height: $cell-height;
+    text-align: center;
+    &.active {
+      background-color: $color3;
+    }
+  }
+  .day-all-select {
+    position: relative;
+    float: left;
+    height: 100%;
+    width: $double-cell-width;
+    line-height: $cell-height;
+    text-align: center;
+    color: $color2;
+    background-color: $color1;
+    cursor: pointer;
+    &.active {
+      &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: $color2;
+      }
+    }
+  }
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+  &:last-child {
+    border-bottom: 1px solid $color4;
+  }
+}
+
+.hour-component {
+  float: left;
+  height: 100%;
+  width: $cell-width;
+  border-right: 1px solid $color4;
+  cursor: pointer;
+  // overflow: hidden;
+  &:last-child {
+    border-right: none;
+  }
+  .active {
+    height: 100%;
+    width: 100%;
+    background-color: $color3;
+  }
+}
